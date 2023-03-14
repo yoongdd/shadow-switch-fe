@@ -1,43 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
-import React, { useState, useEffect } from 'react';
+// import logo from './logo.svg';
+// import './styled/App.css';
+import React from 'react';
+import AppHeader from './components/AppHeader';
+import { Route, Routes } from 'react-router-dom';
+import Home from './pages/Home';
+import Notice from './pages/Notice';
+import Product from './pages/Product';
+import Price from './pages/Price';
+import Faq from './pages/Faq';
+import AppFooter from './components/AppFooter';
+import Login from './pages/Login';
 
 function App() {
   
-  const [message, setMessage] = useState([]);
-  useEffect(() => {
-    fetch("/hello")
-    .then((res) => {
-      return res.json();
-    })
-    .then((data) => {
-      setMessage(data);
-    });
-  }, []);
+  // const [message, setMessage] = useState([]);
+  // useEffect(() => {
+  //   fetch("/hello")
+  //   .then((res) => {
+  //     return res.json();
+  //   })
+  //   .then((data) => {
+  //     setMessage(data);
+  //   });
+  // }, []);
   
-  console.log(message);
+  // console.log(message);
 
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <ul>
-          {message.map((v, idx) => (
-            <li key={`${idx}-${v}`}>{v}</li>
-          ))}
-        </ul>
+        <AppHeader></AppHeader>
       </header>
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route path="/notice" element={<Notice />} />
+          <Route path="/product" element={<Product />} />
+          <Route path="/price" element={<Price />} />
+          <Route path="/faq" element={<Faq />} />
+          <Route path="/:page/admin" element={<Login />} />
+          <Route path="/:page/admin" element={<Login />} />
+        </Routes>
+      <footer>
+        <AppFooter></AppFooter>
+      </footer>
     </div>
   );
 }
